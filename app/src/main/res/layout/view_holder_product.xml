@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="4dp"
+    app:contentPadding="8dp"
+    app:cardElevation="5dp"
+    app:cardCornerRadius="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvProdId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:padding="4dp"
+        android:textSize="16sp"
+        tools:text="Product ID" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:padding="4dp"
+        android:textSize="16sp"
+        android:layout_alignEnd="@id/tvProdId"
+        android:layout_alignParentEnd="true"
+        tools:text="Product ID" />
+
+    <TextView
+        android:id="@+id/tvProdName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:padding="4dp"
+        android:textSize="16sp"
+        android:layout_below="@id/tvProdId"
+        tools:text="Product Name" />
+
+    <TextView
+        android:id="@+id/tvProdDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:padding="4dp"
+        android:textSize="16sp"
+        android:layout_below="@id/tvProdName"
+        tools:text="Product Description" />
+
+    <TextView
+        android:id="@+id/tvMfgDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:padding="4dp"
+        android:textSize="16sp"
+        android:layout_below="@id/tvProdDesc"
+        tools:text="Manufactured Date" />
+
+    <CheckBox
+        android:id="@+id/cbProd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMfgDate"
+        android:layout_centerInParent="true"
+        />
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>
