@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.CheckBox
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,52 +31,70 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: ProductViewModel
     private lateinit var productAdapter: ProductAdapter
     private var list = arrayListOf<ProductModel>()
+    lateinit var btnCompare : Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activity_main)
 
-       DaggerProductComponent.builder()
-        .productWebservicesModule(ProductWebservicesModule())
-        .productRepositoryModule(ProductRepositoryModule())
-        .build()
-        .inject(this)
+        btnCompare = findViewById(R.id.btnCompare)
+      //  btnCompare.isEnabled = false
+       /* if (list.size >= 2)
+            btnCompare.isEnabled = true
+*/
 
-        viewModel = ViewModelProviders.of(this, productViewModelFactory).get(ProductViewModel::class.java)
+        DaggerProductComponent.builder()
+            .productWebservicesModule(ProductWebservicesModule())
+            .productRepositoryModule(ProductRepositoryModule())
+            .build()
+            .inject(this)
+
+
+        viewModel =
+            ViewModelProviders.of(this, productViewModelFactory).get(ProductViewModel::class.java)
         viewModel.fetchProdDetails()
         viewModel.prod.observe(this, Observer {
 
-            Log.i("MainActivity", "${it[1].productName}")
-            productAdapter = ProductAdapter(it, object :
-                ProductListener{
-                override fun onProdClick(prodDetail: ProductModel, v: View) {
-                    if (cbProd.isChecked){
-                       list.add(prodDetail)
+            productAdapter = ProductAdapter(
+                it,
+                object :
+                    ProductListener {
+                    override fun onProdClick(prodDetail: ProductModel) {
+                        list.add(prodDetail)
                     }
                 }
-            })
-
+            )
             rvProd.layoutManager = LinearLayoutManager(this)
             rvProd.adapter = productAdapter
         })
 
         btnCompare.setOnClickListener {
-            var textToDisplay: String
-            if(list.isEmpty()){
-                textToDisplay = "Empty List"
-            }else{
-            textToDisplay = list?.size.toString()
-            }
+            var textToDisplay: String = ""
+
+            if (list.size == 2) {
+                if (list[0].pId == list[1].pId && list[0].price == list[1].price) {
+                    textToDisplay = "Both Products are the same"
+                } else {
+                    textToDisplay = "Both Products are different"
+                }
+            }else if  (list.size > 2){
+                    textToDisplay = "Only two products can be selected"
+
+            }else if (list.size < 2 && !list.isEmpty())
+                textToDisplay = "You need to select two Products"
+
+            else if (list.isEmpty())
+                textToDisplay = "List is Empty"
+
             tvDisplay.text = textToDisplay
-            Log.i("MainActivity", "${list?.get(0)?.productName}")
+
+            list.clear()
         }
 
         btnReset.setOnClickListener {
-            tvDisplay.text = ""
-            list?.clear()
-          if (cbProd.isChecked)
-            cbProd.isChecked = false
+             tvDisplay.text = ""
         }
+
     }
 }

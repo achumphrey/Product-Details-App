@@ -4,6 +4,6 @@ import android.view.View
 import com.example.productdetailsapp.data.ProductModel
 
 interface ProductListener {
-    fun onProdClick(prodDetail: ProductModel, v: View){
+    fun onProdClick(prodDetail: ProductModel){
     }
 }

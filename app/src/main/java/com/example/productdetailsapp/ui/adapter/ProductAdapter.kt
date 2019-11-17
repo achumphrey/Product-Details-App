@@ -9,7 +9,7 @@ import com.example.productdetailsapp.ui.viewholder.ProductViewHolder
 import com.example.productdetailsapp.utils.inflate
 
 
-class ProductAdapter constructor(private val prodDetail: List<ProductModel>, private val listener: ProductListener, var selectedProd: ProductModel?=null) :
+class ProductAdapter constructor(private val prodDetail: List<ProductModel>, private val listener: ProductListener) :
     RecyclerView.Adapter<ProductViewHolder>() {
 
     val list = arrayListOf<ProductModel>()
@@ -23,30 +23,6 @@ class ProductAdapter constructor(private val prodDetail: List<ProductModel>, pri
     override fun getItemCount() = prodDetail.size
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bindItem(prodDetail[holder.adapterPosition],listener, selectedProd){prodDetail ->
-            selectedProd = prodDetail}
+        holder.bindItem(prodDetail[holder.adapterPosition],listener)
     }
-
-/* override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-   holder.bindItem(prodDetail[holder.adapterPosition], selectedProd ){prodDetail ->
-        selectedProd = prodDetail
-       getSelectProdList()
-   }
-}
-
-fun getSelectProdList() {
-   for (i in 0 until prodDetail.size) {
-       if (prodDetail[i] == selectedProd)
-           list.add(prodDetail[i])
-   }
-}       selectedProd = prodDetail
-
-
-fun getselectList(): ArrayList<ProductModel> {
-   if (list.isEmpty() ){
-       return arrayListOf()
-   }else
-       return list
-}*/
-
 }
