@@ -19,10 +19,6 @@ class ProductViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         itemView.tvMfgDate.text = prodDetails.mfgDate
         itemView.cbProd.isChecked = false
 
-    /*    itemView.setOnClickListener {
-            listener.onProdClick(prodDetails)
-        }
-*/
         itemView.cbProd.setOnClickListener {
             if (itemView.cbProd.isChecked)
             listener.onProdClick(prodDetails)

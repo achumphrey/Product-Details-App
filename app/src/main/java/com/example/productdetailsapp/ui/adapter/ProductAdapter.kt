@@ -12,8 +12,6 @@ import com.example.productdetailsapp.utils.inflate
 class ProductAdapter constructor(private val prodDetail: List<ProductModel>, private val listener: ProductListener) :
     RecyclerView.Adapter<ProductViewHolder>() {
 
-    val list = arrayListOf<ProductModel>()
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
 
         val view: View = parent.inflate(R.layout.view_holder_product, false)
